@@ -14,7 +14,7 @@ def process_image(image):
     annotated_img = results[0].plot()
     image_rgb = annotated_img[..., ::-1]
 
-    if not results[0].boxes.conf.numel():
+    if results[0].boxes.conf.data.max().item() < 0.6:
         return no_doctor_image
     else:
         return image_rgb
